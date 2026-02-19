@@ -97,7 +97,7 @@ export const TestimonialsAndFAQ = () => {
     <section id="testimonials" className="py-30 bg-transparent relative overflow-hidden">
       <div className="absolute inset-0 grid-bg pointer-events-none" />
       <div className="container mx-auto px-6 relative z-10">
-        {/* Stats Section */}
+        {/* Client Testimonials section commented out
         <div className="mb-32 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -142,6 +142,7 @@ export const TestimonialsAndFAQ = () => {
             />
           </div>
         </div>
+        */}
 
         {/* FAQ Section */}
         <div id="faq" className="pt-32 border-t border-[#2551AF]/10">
