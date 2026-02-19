@@ -115,7 +115,7 @@ export function DashboardContent() {
     if (!confirm("Are you sure you want to delete this project?")) return;
     try {
       await deleteProject(id);
-      await loadProjects();
+      await loadProjects(userId, profile);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Delete failed");
     }

@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Github,
   Linkedin,
   Twitter,
   Atom,
