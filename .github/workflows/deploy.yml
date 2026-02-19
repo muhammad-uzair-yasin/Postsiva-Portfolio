@@ -1,0 +1,55 @@
+name: Deploy Portfolio to Server
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Portfolio to Server
+        if: github.ref_name == 'main' || github.ref_name == 'master'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          timeout: 60s
+          command_timeout: 10m
+          script: |
+            cd /root/Postsiva-Portfolio
+
+            git stash
+            git fetch origin ${{ github.ref_name }}
+            git reset --hard origin/${{ github.ref_name }}
+
+            npm install
+
+            npm run build
+
+            if [ -d ".next" ]; then
+              echo "✅ Portfolio build successful"
+              ls -la .next/ | head -5
+            else
+              echo "❌ Portfolio build failed"
+              exit 1
+            fi
+
+            pm2 restart postsiva-portfolio
+
+            sleep 5
+
+            pm2 status postsiva-portfolio
+
+            nginx -t
+
+            systemctl reload nginx
+
+            echo "Testing portfolio accessibility..."
+            curl -I http://localhost:6001/ || echo "Portfolio test failed"
+            curl -I https://portfolio.postsiva.com/ || echo "Portfolio HTTPS test failed"
+
+            echo "🚀 Portfolio deployment completed successfully!"
