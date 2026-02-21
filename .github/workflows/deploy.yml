@@ -21,10 +21,11 @@ jobs:
           command_timeout: 10m
           script: |
             cd /root/Postsiva-Portfolio
+            
 
             git stash
             git fetch origin ${{ github.ref_name }}
-            git reset --hard origin/${{ github.ref_name }}
+            git reset --hard origin/master
 
             npm install
 
