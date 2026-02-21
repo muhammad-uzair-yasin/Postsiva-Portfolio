@@ -26,13 +26,11 @@ export function DashboardContent() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const router = useRouter();
 
-  const loadProjects = async (uid: string | null, p: Profile | null | undefined) => {
+  const loadProjects = async () => {
     setLoading(true);
     setError(null);
     try {
-      const list = await getProjects(
-        p?.role === "team_member" && uid ? { userId: uid, role: p.role } : undefined
-      );
+      const list = await getProjects();
       setProjects(list);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to load projects");
@@ -50,7 +48,7 @@ export function DashboardContent() {
       const uid = session?.user?.id ?? null;
       setUserId(uid);
       setProfile(p ?? null);
-      if (uid) loadProjects(uid, p ?? null);
+      if (uid) loadProjects();
     })();
     return () => {
       cancelled = true;
@@ -107,7 +105,7 @@ export function DashboardContent() {
           ownerId: profile?.role === "team_member" && userId ? userId : undefined,
         });
       }
-      await loadProjects(userId, profile);
+      await loadProjects();
       setIsFormOpen(false);
       setEditingProject(null);
     } catch (e) {
@@ -119,7 +117,7 @@ export function DashboardContent() {
     if (!confirm("Are you sure you want to delete this project?")) return;
     try {
       await deleteProject(id);
-      await loadProjects(userId, profile);
+      await loadProjects();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Delete failed");
     }
