@@ -114,7 +114,7 @@ const UZAIR_PROJECTS = [
     image: "https://storage.postsiva.com/uploads/6999af5200c07_1771679570.jpeg",
     category: "Backend Development",
     tech: ["FastAPI", "Python", "Next.js", "AI", "Backend Development", "REST API", "YouTube Automation"],
-    githubLink: "https://github.com/Uzair-DevOps",
+    githubLink: "https://github.com/muhammad-uzair-yasin/",
     liveLink: "https://youtube.postsiva.com/",
   },
   {

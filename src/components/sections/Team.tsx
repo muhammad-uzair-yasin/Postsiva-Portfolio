@@ -203,22 +203,25 @@ export const Team = () => {
           </span>
         </div>
 
-        {/* Team Members Grid - All visible at once */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 max-w-7xl mx-auto">
+        {/* Team Members Grid - Same card style as Team Leaders */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
           {testimonialTeam.map((member, index) => (
             <motion.div
               key={member.slug}
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.1, duration: 0.5, type: "spring", stiffness: 50 }}
-              whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
+              transition={{ delay: index * 0.2, duration: 0.6, type: "spring", stiffness: 50 }}
+              whileHover={{
+                y: -10,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
               className="relative group h-full w-full"
             >
               <div className="absolute -inset-1 bg-[#2551AF]/10 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-              <div className="bg-white border border-[#2551AF]/20 rounded-4xl p-6 sm:p-8 shadow-xl shadow-[rgba(37,81,175,0.1)] h-full flex flex-col gap-6 items-center relative overflow-hidden transition-all duration-500 group-hover:border-[#2551AF]/30 group-hover:shadow-[rgba(37,81,175,0.15)]">
+              <div className="bg-white border border-[#2551AF]/20 rounded-4xl p-8 sm:p-10 shadow-xl shadow-[rgba(37,81,175,0.1)] h-full flex flex-col gap-8 items-center relative overflow-hidden transition-all duration-500 group-hover:border-[#2551AF]/30 group-hover:shadow-[rgba(37,81,175,0.15)]">
                 <div
-                  className="relative shadow-xl h-48 w-48 sm:h-56 sm:w-56 shrink-0 rounded-3xl overflow-hidden group-hover:scale-[1.05] transition-transform duration-700 ring-4 ring-white cursor-zoom-in"
+                  className="relative shadow-xl h-64 w-64 shrink-0 rounded-3xl overflow-hidden group-hover:scale-[1.05] transition-transform duration-700 ring-4 ring-white cursor-zoom-in"
                   onClick={() => setSelectedImage(member.image)}
                 >
                   <Image
@@ -226,45 +229,45 @@ export const Team = () => {
                     alt={member.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 640px) 192px, 224px"
+                    sizes="(max-width: 640px) 256px, 320px"
                   />
                   <div className="absolute inset-0 bg-[#2551AF]/10 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center">
                     <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-[#2551AF] tracking-tight leading-tight text-center">
+                <h3 className="text-2xl sm:text-4xl font-black text-[#2551AF] tracking-tight leading-tight transition-colors text-center">
                   {member.name}
                 </h3>
-                <div className="inline-block px-4 py-2 rounded-full bg-[#2551AF]/10 text-[#2551AF] font-bold text-xs uppercase tracking-widest whitespace-nowrap shadow-sm border border-[#2551AF]/20 text-center">
+                <div className="inline-block px-6 py-2 rounded-full bg-[#2551AF]/10 text-[#2551AF] font-bold text-xs uppercase tracking-widest whitespace-nowrap shadow-sm border border-[#2551AF]/20 text-center">
                   {member.role}
                 </div>
-                <p className="text-[#2551AF] font-medium text-sm sm:text-base leading-relaxed max-w-xs mx-auto text-center line-clamp-3">
+                <p className="text-[#2551AF] font-medium text-lg leading-relaxed max-w-sm mx-auto text-center">
                   {member.description}
                 </p>
                 <div className="flex items-center justify-center gap-5">
                   {member.socials?.linkedin && (
-                    <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-[#2551AF]/10 border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm">
-                      <Linkedin className="w-5 h-5" />
+                    <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-[#2551AF]/10 border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm">
+                      <Linkedin className="w-6 h-6" />
                     </a>
                   )}
                   {member.socials?.email && (
-                    <a href={`mailto:${member.socials.email}`} className="w-10 h-10 rounded-xl bg-[#2551AF]/10 border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm">
-                      <Mail className="w-5 h-5" />
+                    <a href={`mailto:${member.socials.email}`} className="w-12 h-12 rounded-xl bg-[#2551AF]/10 border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm">
+                      <Mail className="w-6 h-6" />
                     </a>
                   )}
                   {member.socials?.phone && (
-                    <a href={`https://wa.me/${member.socials.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-[#2551AF]/10 border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm">
-                      <FaWhatsapp className="w-5 h-5" />
+                    <a href={`https://wa.me/${member.socials.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-[#2551AF]/10 border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm">
+                      <FaWhatsapp className="w-6 h-6" />
                     </a>
                   )}
                 </div>
                 <div className="w-full mt-auto">
                   <Link
                     href={`/team/${member.slug}`}
-                    className="w-full py-4 bg-[#2551AF] text-white rounded-2xl font-black shadow-lg shadow-[#2551AF]/20 flex items-center justify-center gap-2 hover:scale-[1.02] transition-all group/btn cursor-pointer text-sm sm:text-base"
+                    className="w-full py-5 bg-[#2551AF] text-white rounded-2xl font-black shadow-lg shadow-[#2551AF]/20 flex items-center justify-center gap-2 hover:scale-[1.02] transition-all group/btn cursor-pointer"
                   >
                     View Full Profile
-                    <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                    <ExternalLink className="w-5 h-5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                   </Link>
                 </div>
               </div>
