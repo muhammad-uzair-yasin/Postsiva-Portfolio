@@ -17,6 +17,7 @@ import {
   Trash2,
   Plus,
   Minus,
+  Globe,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +32,7 @@ type Socials = {
   whatsapp?: string;
   email?: string;
   phone?: string;
+  portfolio?: string;
 };
 type Certificate = {
   name: string;
@@ -82,6 +84,11 @@ const SOCIAL_FIELDS: {
     key: "phone",
     icon: <Phone className="w-5 h-5" />,
     placeholder: "+1234567890",
+  },
+  {
+    key: "portfolio",
+    icon: <Globe className="w-5 h-5" />,
+    placeholder: "https://your-portfolio.com",
   },
 ];
 

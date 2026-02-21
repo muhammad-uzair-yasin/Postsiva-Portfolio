@@ -17,6 +17,7 @@ import {
   Loader2,
   Briefcase,
   Github,
+  Globe,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
@@ -49,6 +50,7 @@ type TeamMemberDisplay = {
     email?: string;
     phone?: string;
     github?: string;
+    portfolio?: string;
   };
 };
 
@@ -217,6 +219,17 @@ export default function TeamProfilePage() {
                           className="w-14 h-14 rounded-2xl bg-white border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm"
                         >
                           <Github className="w-6 h-6" />
+                        </a>
+                      )}
+                      {member.socials.portfolio && (
+                        <a
+                          href={member.socials.portfolio}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-14 h-14 rounded-2xl bg-white border border-[#2551AF]/20 flex items-center justify-center text-[#2551AF] hover:bg-[#2551AF] hover:text-white transition-all shadow-sm"
+                          title="Personal Portfolio"
+                        >
+                          <Globe className="w-6 h-6" />
                         </a>
                       )}
                       {member.socials.email && (

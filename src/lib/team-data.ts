@@ -20,6 +20,7 @@ export type TeamMember = {
     email?: string;
     phone?: string;
     github?: string;
+    portfolio?: string;
   };
 };
 
