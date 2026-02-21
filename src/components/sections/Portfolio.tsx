@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Sparkles, ChevronRight } from "lucide-react";
+import { Sparkles, Github, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/project-data";
@@ -54,21 +54,13 @@ export const Portfolio = ({ projects, fullPage }: PortfolioProps) => {
               className="group bg-white rounded-[2.5rem] overflow-hidden border border-[#2551AF]/20 shadow-xl shadow-[rgba(37,81,175,0.1)] hover:shadow-2xl hover:shadow-[rgba(37,81,175,0.12)] transition-all duration-500 flex flex-col h-full"
             >
               {/* Image Section */}
-              <Link
-                href={`/portfolio/${project.slug}`}
-                className="relative aspect-16/10 overflow-hidden block"
-              >
+              <div className="relative aspect-16/10 overflow-hidden block">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-[#2551AF]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl scale-0 group-hover:scale-100 transition-transform duration-500">
-                    <ExternalLink className="w-6 h-6 text-[#2551AF]" />
-                  </div>
-                </div>
                 <div className="absolute top-6 left-6 flex gap-2">
                   <div className="px-4 py-2 bg-white/80 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-wider text-[#2551AF] border border-[#2551AF]/10">
                     {project.category}
@@ -80,31 +72,45 @@ export const Portfolio = ({ projects, fullPage }: PortfolioProps) => {
                     </div>
                   )}
                 </div>
-              </Link>
+              </div>
 
               {/* Content Section */}
               <div className="p-8 flex flex-col grow">
                 <h3 className="text-2xl font-black text-[#2551AF] mb-3 group-hover:text-[#1a3a8a] transition-colors line-clamp-1">
                   {project.title}
                 </h3>
-                <p className="text-[#2551AF]/70 font-medium line-clamp-2 mb-8 leading-relaxed grow">
+                <p className="text-[#2551AF]/70 font-medium line-clamp-2 mb-6 leading-relaxed grow">
                   {project.description}
                 </p>
 
-                <Link
-                  href={`/portfolio/${project.slug}`}
-                  className="inline-flex items-center gap-2 text-sm font-black text-[#2551AF] group/btn transition-all mt-auto"
-                >
-                  <span className="relative overflow-hidden">
-                    <span className="block transition-transform duration-300 group-hover/btn:-translate-y-full">
-                      View Case Study
-                    </span>
-                    <span className="absolute top-0 left-0 block transition-transform duration-300 translate-y-full group-hover/btn:translate-y-0 text-[#1a3a8a]">
-                      View Case Study
-                    </span>
-                  </span>
-                  <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </Link>
+                {(project.githubLink || project.liveLink) && (
+                  <div className="flex items-center gap-3 mt-auto">
+                    {project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-bold text-[#2551AF]/80 hover:text-[#2551AF] transition-colors"
+                        aria-label="GitHub repository"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span>GitHub</span>
+                      </a>
+                    )}
+                    {project.liveLink && (
+                      <a
+                        href={project.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-bold text-[#2551AF]/80 hover:text-[#2551AF] transition-colors"
+                        aria-label="Live demo"
+                      >
+                        <Globe className="w-5 h-5" />
+                        <span>Live</span>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

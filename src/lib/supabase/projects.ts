@@ -17,6 +17,7 @@ interface ProjectRow {
   results: string[];
   client: string | null;
   live_link: string | null;
+  github_link: string | null;
   owner_id: string | null;
 }
 
@@ -45,6 +46,7 @@ function rowToProject(row: ProjectRow): Project {
     results: row.results ?? [],
     client: row.client ?? undefined,
     liveLink: row.live_link ?? undefined,
+    githubLink: row.github_link ?? undefined,
     ownerId: row.owner_id ?? undefined,
   };
 }
@@ -65,6 +67,7 @@ function projectToRow(project: Project): Omit<ProjectRow, "id"> {
     results: project.results ?? [],
     client: project.client ?? null,
     live_link: project.liveLink ?? null,
+    github_link: project.githubLink ?? null,
     owner_id: project.ownerId ?? null,
   };
 }
@@ -108,6 +111,7 @@ export async function createProject(input: {
   results?: string[];
   client?: string;
   liveLink?: string;
+  githubLink?: string;
   slug?: string;
   ownerId?: string | null;
 }): Promise<Project> {
@@ -128,6 +132,7 @@ export async function createProject(input: {
     results: input.results ?? [],
     client: input.client ?? null,
     live_link: input.liveLink ?? null,
+    github_link: input.githubLink ?? null,
     owner_id: input.ownerId ?? null,
   };
   const { data, error } = await supabase.from("projects").insert(row).select().single();

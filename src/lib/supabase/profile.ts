@@ -44,3 +44,14 @@ export async function getProfileByTeamSlug(slug: string): Promise<Profile | null
   if (error || !data) return null;
   return data as Profile;
 }
+
+/** Fetch all profiles (for landing: aggregate certificates across members). */
+export async function getAllProfiles(): Promise<Profile[]> {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("user_id, role, team_slug, profile_data")
+    .not("team_slug", "is", null);
+  if (error) return [];
+  return (data ?? []) as Profile[];
+}

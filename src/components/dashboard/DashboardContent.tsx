@@ -72,7 +72,7 @@ export function DashboardContent() {
   }, [projects, searchQuery, filterCategory]);
 
   const handleSaveProject = async (
-    project: Pick<Project, "id" | "title" | "category" | "description" | "image" | "media" | "tech" | "duration">
+    project: Pick<Project, "id" | "title" | "category" | "description" | "image" | "media" | "tech" | "duration" | "liveLink" | "githubLink">
   ) => {
     try {
       if (editingProject) {
@@ -85,6 +85,8 @@ export function DashboardContent() {
           media: project.media,
           tech: project.tech,
           duration: project.duration,
+          liveLink: project.liveLink ?? editingProject.liveLink,
+          githubLink: project.githubLink ?? editingProject.githubLink,
         };
         await updateProject(merged);
       } else {
@@ -100,6 +102,8 @@ export function DashboardContent() {
           features: [],
           results: [],
           featured: false,
+          liveLink: project.liveLink,
+          githubLink: project.githubLink,
           ownerId: profile?.role === "team_member" && userId ? userId : undefined,
         });
       }
