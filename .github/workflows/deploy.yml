@@ -16,7 +16,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /root/Postsiva-Portfolio
-            git pull origin main
+            git pull origin master
             npm install
             npm run build
             pm2 restart postsiva-portfolio
